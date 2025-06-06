@@ -13,6 +13,9 @@ def main():
 
     cell_1.draw(20, 20, 40, 40)
     cell_2.draw(40, 20, 60, 40)
+
+    cell_1.draw_move(cell_2)
+
     cell_3.draw(60, 20, 80, 40)
     cell_4.draw(80, 20, 100, 40)
 
