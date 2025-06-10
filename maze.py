@@ -122,3 +122,61 @@ class Maze:
         for c in range(self.num_cols):
             for r in range(self.num_rows):
                 self.__cells[c][r].visited = False
+
+    def solve(self):
+        result = self.__solve_r(0, 0)
+        return result
+    
+    def __solve_r(self, i, j):
+        self.__animate()
+        self.__cells[i][j].visited = True
+
+        c_cell = self.__cells[i][j]
+
+        # checks if current cell is end cell
+        if((i == self.num_cols - 1) and (j == self.num_rows - 1)):
+            return 
+        
+        # check cells in each direction
+        # left
+        if i > 0 and not self.__cells[i - 1][j].visited:
+            if (not self.__cells[i][j].has_left_wall) and not self.__cells[i - 1][j].has_right_wall:
+                l_cell = self.__cells[i - 1][j]
+                c_cell.draw_move(l_cell)
+                result = self.__solve_r(i - 1, j)
+                if(result):
+                    return True
+                c_cell.draw_move(l_cell, True)
+
+        # right
+        if i < self.num_cols - 1 and not self.__cells[i + 1][j].visited:
+            if (not self.__cells[i][j].has_right_wall) and not self.__cells[i + 1][j].has_left_wall:
+                r_cell = self.__cells[i + 1][j]
+                c_cell.draw_move(r_cell)
+                result = self.__solve_r(i + 1, j)
+                if(result):
+                    return True
+                c_cell.draw_move(r_cell, True)
+
+        # up
+        if j > 0 and not self.__cells[i][j - 1].visited:
+            if (not self.__cells[i][j].has_top_wall) and not self.__cells[i][j - 1].has_bottom_wall:
+                u_cell = self.__cells[i][j - 1]
+                c_cell.draw_move(u_cell)
+                result = self.__solve_r(i, j - 1)
+                if(result):
+                    return True
+                c_cell.draw_move(u_cell, True)
+
+        # down
+        if j < self.num_rows - 1 and not self.__cells[i][j + 1].visited:
+            if (not self.__cells[i][j].has_bottom_wall) and not self.__cells[i][j + 1].has_top_wall:
+                d_cell = self.__cells[i][j + 1]
+                c_cell.draw_move(d_cell)
+                result = self.__solve_r(i, j + 1)
+                if(result):
+                    return True
+                c_cell.draw_move(d_cell, True)
+
+        # if no directions worked out
+        return False
