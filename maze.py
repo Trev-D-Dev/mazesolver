@@ -50,11 +50,11 @@ class Maze:
     def __break_entrance_and_exit(self):
         # top left cell
         self.__cells[0][0].has_top_wall = False
-        self.__draw_cell(0, 0)
+        #self.__draw_cell(0, 0)
 
         c = self.num_cols - 1
         r = self.num_rows - 1
 
         # bottom right cell
         self.__cells[-1][-1].has_bottom_wall = False
-        self.__draw_cell(c, r)
+        #self.__draw_cell(c, r)
