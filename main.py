@@ -15,7 +15,11 @@ def main():
     win = Window(screen_x, screen_y)
     seed = 10
 
+    # line for testing with seed
     maze = Maze(margin, margin, num_rows, num_cols, cell_size_x, cell_size_y, win, seed)
+
+    # line for testing seedless
+    # maze = Maze(margin, margin, num_rows, num_cols, cell_size_x, cell_size_y, win)
 
     win.wait_for_close()
 
